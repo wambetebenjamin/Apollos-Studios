@@ -10,7 +10,8 @@ const en = {
   "nav.about": "About",
   "nav.guidelines": "Guidelines",
   "nav.contact": "Contact",
-  "nav.saved": "Saved & My Listings",
+  "nav.saved": "Saved",
+  "nav.savedFull": "Saved & My Listings",
   "nav.list": "List a Space",
   "nav.menu": "Menu",
 
@@ -100,7 +101,8 @@ const sw: Record<DictKey, string> = {
   "nav.about": "Kuhusu",
   "nav.guidelines": "Mwongozo",
   "nav.contact": "Wasiliana",
-  "nav.saved": "Vilivyohifadhiwa",
+  "nav.saved": "Hifadhi",
+  "nav.savedFull": "Vilivyohifadhiwa",
   "nav.list": "orodhesha Chumba",
   "nav.menu": "Menyu",
 
@@ -188,7 +190,8 @@ const fr: Record<DictKey, string> = {
   "nav.about": "À propos",
   "nav.guidelines": "Charte",
   "nav.contact": "Contact",
-  "nav.saved": "Favoris et Annonces",
+  "nav.saved": "Favoris",
+  "nav.savedFull": "Favoris et Annonces",
   "nav.list": "Proposer un lieu",
   "nav.menu": "Menu",
 

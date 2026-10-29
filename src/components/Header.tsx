@@ -51,7 +51,11 @@ export function Header() {
   };
 
   const moreActive =
-    isActive("/about") || isActive("/guidelines") || isActive("/contact");
+    isActive("/about") ||
+    isActive("/guidelines") ||
+    isActive("/contact") ||
+    isActive("/privacy") ||
+    isActive("/terms");
 
   return (
     <nav
@@ -61,6 +65,7 @@ export function Header() {
     >
       <div className="container">
         <Link className="navbar-brand" href="/">
+          <span className="ws-brand-mark" aria-hidden="true" />
           Apollos<span>Studios</span>
         </Link>
 
@@ -79,7 +84,7 @@ export function Header() {
           className={`collapse navbar-collapse${mobileOpen ? " show" : ""}`}
           id="ftco-nav"
         >
-          <ul className="navbar-nav ml-auto align-items-lg-center">
+          <ul className="navbar-nav ml-auto">
             <li className={`nav-item${isActive("/") ? " active" : ""}`}>
               <Link href="/" className="nav-link">
                 {t("nav.home")}
@@ -107,6 +112,10 @@ export function Header() {
             </li>
             <li className={`nav-item${isActive("/saved") ? " active" : ""}`}>
               <Link href="/saved" className="nav-link">
+                <span
+                  className={savedTotal > 0 ? "icon-bookmark mr-1" : "icon-bookmark-o mr-1"}
+                  aria-hidden="true"
+                />
                 {t("nav.saved")}
                 {savedTotal > 0 ? (
                   <span className="ws-saved-count">{savedTotal}</span>
@@ -122,24 +131,13 @@ export function Header() {
             >
               <button
                 type="button"
-                className="nav-link"
+                className="nav-link ws-nav-dropdown-toggle"
                 aria-expanded={moreOpen}
                 aria-haspopup="true"
                 onClick={() => setMoreOpen((prev) => !prev)}
-                style={{
-                  background: "transparent",
-                  border: 0,
-                  cursor: "pointer",
-                  width: "100%",
-                  textAlign: "left",
-                }}
               >
-                {t("nav.more")}{" "}
-                <span
-                  className="icon-angle-down"
-                  aria-hidden="true"
-                  style={{ marginLeft: 3 }}
-                />
+                <span>{t("nav.more")}</span>
+                <span className="icon-angle-down" aria-hidden="true" />
               </button>
               <div className="ws-nav-dropdown-menu" role="menu">
                 <Link href="/about" role="menuitem">
@@ -160,7 +158,7 @@ export function Header() {
               </div>
             </li>
 
-            <li className="nav-item d-flex align-items-center px-lg-2 py-2 py-lg-0">
+            <li className="nav-item d-flex align-items-center px-lg-1 py-2 py-lg-0">
               <div className="ws-lang-group" role="group" aria-label="Language switcher">
                 {LOCALES.map((opt) => (
                   <button

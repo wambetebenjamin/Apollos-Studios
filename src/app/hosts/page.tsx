@@ -33,10 +33,10 @@ export default function HostsPage() {
             </div>
           </div>
 
-          <div className="row">
+          <div className="row ftco-services">
             {HOST_BENEFITS.map((b) => (
               <div key={b.number} className="col-md-6 col-lg-3 d-flex align-self-stretch mb-4 ftco-animate">
-                <div className="media block-6 services d-block p-4 border bg-white w-100">
+                <div className="media block-6 services d-block w-100">
                   <div className="icon d-flex justify-content-center align-items-center mb-3">
                     <span className={b.icon} aria-hidden="true" />
                   </div>

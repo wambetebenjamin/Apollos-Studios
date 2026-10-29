@@ -33,7 +33,7 @@ export function Preloader() {
           fill="none"
           strokeWidth="4"
           strokeMiterlimit="10"
-          stroke="#F96D00"
+          stroke="#fcd307"
         />
       </svg>
     </div>

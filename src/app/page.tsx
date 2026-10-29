@@ -49,12 +49,7 @@ export default async function HomePage() {
                     <Link
                       key={c.slug}
                       href={`/spaces?city=${c.slug}`}
-                      className="ws-badge"
-                      style={{
-                        background: "rgba(0, 0, 0, 0.72)",
-                        color: "#ffffff",
-                        borderColor: "rgba(255, 255, 255, 0.28)",
-                      }}
+                      className="ws-hero-city-pill"
                     >
                       {c.name}
                     </Link>
@@ -99,13 +94,13 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <div className="row py-5">
-            <div className="col-md-3 d-flex align-self-stretch ftco-animate">
+          <div className="row py-5 ftco-services">
+            <div className="col-md-6 col-lg-3 mb-4 mb-lg-0 d-flex align-self-stretch ftco-animate">
               <div className="media block-6 services d-block">
                 <div className="icon d-flex justify-content-center align-items-center">
                   <span className="flaticon-idea" aria-hidden="true" />
                 </div>
-                <div className="media-body p-2 mt-3">
+                <div className="media-body mt-2">
                   <h3 className="heading">Rehearsal &amp; Live Rooms</h3>
                   <p>
                     Treated floors with drum shells, bass/guitar backline, vocal PA wedges and clear evening SPL curfews.
@@ -114,12 +109,12 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div className="col-md-6 col-lg-3 mb-4 mb-lg-0 d-flex align-self-stretch ftco-animate">
               <div className="media block-6 services d-block">
                 <div className="icon d-flex justify-content-center align-items-center">
                   <span className="flaticon-innovation" aria-hidden="true" />
                 </div>
-                <div className="media-body p-2 mt-3">
+                <div className="media-body mt-2">
                   <h3 className="heading">Recording &amp; Podcast Nooks</h3>
                   <p>
                     Inverter-backed booths for dry-hire producers, solo vocalists, audiobooks and four-mic roundtables.
@@ -128,12 +123,12 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div className="col-md-6 col-lg-3 mb-4 mb-lg-0 d-flex align-self-stretch ftco-animate">
               <div className="media block-6 services d-block">
                 <div className="icon d-flex justify-content-center align-items-center">
                   <span className="flaticon-analysis" aria-hidden="true" />
                 </div>
-                <div className="media-body p-2 mt-3">
+                <div className="media-body mt-2">
                   <h3 className="heading">Daylight Visual Art Bays</h3>
                   <p>
                     High-wall studios with steady natural light, H-frame easels, pinning walls and deep brush sinks.
@@ -142,12 +137,12 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="col-md-3 d-flex align-self-stretch ftco-animate">
+            <div className="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
               <div className="media block-6 services d-block">
                 <div className="icon d-flex justify-content-center align-items-center">
-                  <span className="flaticon-handshake" aria-hidden="true" />
+                  <span className="flaticon-ux-design" aria-hidden="true" />
                 </div>
-                <div className="media-body p-2 mt-3">
+                <div className="media-body mt-2">
                   <h3 className="heading">Maker, Clay &amp; Stitch Benches</h3>
                   <p>
                     Pottery wheels, scheduled kiln shelves, textile print tables and dust-extracted joinery bays by the day.
@@ -435,7 +430,7 @@ export default async function HomePage() {
       </section>
 
       {/* 7. Voices from Artists & Hosts (Swiper Testimony Section) */}
-      <section className="ftco-section testimony-section bg-light">
+      <section className="ftco-section testimony-section">
         <div className="container">
           <div className="row justify-content-center mb-5 pb-2">
             <div className="col-md-8 text-center heading-section ftco-animate">
@@ -511,28 +506,31 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 9. Host CTA Banner */}
-      <section className="ftco-section ftco-bg-dark" style={{ background: "#3c312e" }}>
+      {/* 9. Pre-Footer Host CTA Band */}
+      <section className="ws-host-cta-band">
         <div className="container">
-          <div className="row align-items-center justify-content-between">
-            <div className="col-lg-8 mb-4 mb-lg-0 heading-section heading-section-white ftco-animate">
-              <span className="subheading" style={{ color: "#fcd307" }}>
-                For Studio Stewards &amp; Collectives
-              </span>
-              <h2 className="mb-3" style={{ fontSize: "30px" }}>
-                {t("home.ctaTitle")}
-              </h2>
-              <p className="mb-0" style={{ color: "rgba(255,255,255,0.86)" }}>
-                {t("home.ctaBody")}
-              </p>
-            </div>
-            <div className="col-lg-4 d-flex flex-wrap justify-content-lg-end ftco-animate" style={{ gap: "12px" }}>
-              <Link href="/list" className="btn btn-primary py-3 px-4">
-                {t("nav.list")}
-              </Link>
-              <Link href="/hosts" className="btn btn-white py-3 px-4">
-                Host Tips
-              </Link>
+          <div className="ws-host-cta-card ftco-animate">
+            <div className="row align-items-center justify-content-between">
+              <div className="col-lg-8 mb-4 mb-lg-0 heading-section">
+                <span className="subheading">
+                  For Studio Stewards &amp; Collectives
+                </span>
+                <h2 className="mb-3" style={{ fontSize: "clamp(24px, 3vw, 32px)" }}>
+                  {t("home.ctaTitle")}
+                </h2>
+                <p className="mb-0">{t("home.ctaBody")}</p>
+              </div>
+              <div
+                className="col-lg-4 d-flex flex-wrap justify-content-lg-end"
+                style={{ gap: "12px" }}
+              >
+                <Link href="/list" className="btn btn-primary py-3 px-4">
+                  {t("nav.list")}
+                </Link>
+                <Link href="/hosts" className="btn btn-black py-3 px-4">
+                  Host Tips
+                </Link>
+              </div>
             </div>
           </div>
         </div>

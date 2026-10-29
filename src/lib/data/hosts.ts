@@ -28,7 +28,7 @@ export const HOST_BENEFITS: HostBenefit[] = [
     number: "01",
     title: "Zero Commission, Direct Contact",
     body: "Apollos Studios never takes a cut of your hourly or day rate. Artists message you directly by WhatsApp or email, and you handle quotes and payment on your own terms.",
-    icon: "flaticon-handshake",
+    icon: "flaticon-ideas",
   },
   {
     number: "02",
