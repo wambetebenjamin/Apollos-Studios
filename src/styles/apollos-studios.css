@@ -1,14 +1,15 @@
 /* ==========================================================================
-   Apollos Studios - Whitespace Design System, Contrast & Layout Contract
+   Apollos Studios - Whitespace Design System, Contrast & Zero-Overlap Contract
    Preserves Colorlib Whitespace palette (#fcd307, #000000, #ffffff, #fafafa,
    #3c312e, #141313), Poppins typography, icon fonts and scroll motion while
-   guaranteeing high-contrast readability across all viewports.
+   guaranteeing zero layout collisions and high-contrast legibility.
    ========================================================================== */
 
 :root {
   --ws-primary: #fcd307;
   --ws-primary-hover: #e5bf00;
   --ws-black: #000000;
+  --ws-stage: #0b0b0b;
   --ws-ink: #141414;
   --ws-body: #262626;
   --ws-muted: #525252;
@@ -21,6 +22,26 @@
   --ws-border: #dedede;
   --ws-border-strong: #141414;
   --font-poppins: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   0. Defensive Resets Against Utility Collisions
+   -------------------------------------------------------------------------- */
+.collapse {
+  visibility: visible;
+}
+
+.block-6,
+.block-7,
+.block-9,
+.block-18,
+.block-23 {
+  block-size: auto !important;
+  height: auto;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -60,8 +81,6 @@ p {
   color: var(--ws-body);
 }
 
-/* Prevent template-style.css `a { color: #fcd307 }` from rendering unreadable
-   yellow text on white/light backgrounds */
 a {
   color: var(--ws-ink);
   text-decoration: none;
@@ -73,16 +92,16 @@ a:focus {
   text-decoration: none;
 }
 
-main p a:not(.btn):not(.ws-badge):not(.ws-chip),
-main li a:not(.btn):not(.ws-badge):not(.ws-chip) {
+main p a:not(.btn):not(.ws-badge):not(.ws-chip):not(.ws-hero-city-pill),
+main li a:not(.btn):not(.ws-badge):not(.ws-chip):not(.ws-hero-city-pill) {
   color: var(--ws-black);
   font-weight: 600;
   border-bottom: 2px solid var(--ws-primary);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-main p a:not(.btn):not(.ws-badge):not(.ws-chip):hover,
-main li a:not(.btn):not(.ws-badge):not(.ws-chip):hover {
+main p a:not(.btn):not(.ws-badge):not(.ws-chip):not(.ws-hero-city-pill):hover,
+main li a:not(.btn):not(.ws-badge):not(.ws-chip):not(.ws-hero-city-pill):hover {
   background-color: var(--ws-primary);
   color: var(--ws-black);
 }
@@ -92,7 +111,6 @@ main li a:not(.btn):not(.ws-badge):not(.ws-chip):hover {
   outline-offset: 2px;
 }
 
-/* Keep SSR and reduced-motion content visible before JS scroll reveals run */
 html:not(.ws-js-ready) .ftco-animate {
   opacity: 1 !important;
   visibility: visible !important;
@@ -112,7 +130,6 @@ html:not(.ws-js-ready) .ftco-animate {
   }
 }
 
-/* Skip link: hidden off-screen until keyboard focus */
 .ws-skip-link {
   position: fixed;
   top: -120px;
@@ -213,7 +230,7 @@ html:not(.ws-js-ready) .ftco-animate {
 .btn.btn-primary:focus,
 .btn.btn-primary:active {
   background: var(--ws-black) !important;
-  border-color: var(--ws-black) !important;
+  border-color: var(--ws-primary) !important;
   color: var(--ws-primary) !important;
 }
 
@@ -260,20 +277,34 @@ html:not(.ws-js-ready) .ftco-animate {
 }
 
 /* --------------------------------------------------------------------------
-   4. Whitespace Navbar (#ftco-navbar) - Crisp Desktop & Mobile Readability
+   4. Sticky, Single-Row Whitespace Navbar (#ftco-navbar)
    -------------------------------------------------------------------------- */
-#ftco-navbar.ftco-navbar-light {
+#ftco-navbar.ftco-navbar-light,
+#ftco-navbar.ftco-navbar-light.scrolled,
+#ftco-navbar.ftco-navbar-light.scrolled.awake,
+#ftco-navbar.ftco-navbar-light.scrolled.sleep {
+  position: sticky !important;
+  top: 0 !important;
+  margin-top: 0 !important;
   background: var(--ws-white) !important;
   border-bottom: 1px solid #e5e5e5;
   z-index: 1050;
   padding: 0;
 }
 
+#ftco-navbar.ftco-navbar-light.scrolled {
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+}
+
+#ftco-navbar.ftco-navbar-light .navbar-collapse {
+  visibility: visible !important;
+}
+
 #ftco-navbar.ftco-navbar-light .navbar-brand {
   color: var(--ws-white) !important;
   background: var(--ws-black) !important;
   font-weight: 800;
-  font-size: 21px;
+  font-size: 20px;
   letter-spacing: -0.02em;
   display: inline-flex;
   align-items: center;
@@ -295,9 +326,10 @@ html:not(.ws-js-ready) .ftco-animate {
 }
 
 @media (min-width: 992px) {
-  #ftco-navbar.ftco-navbar-light .navbar-brand {
-    padding: 22px 26px 22px 0;
-    margin-right: 12px;
+  #ftco-navbar.ftco-navbar-light .navbar-brand,
+  #ftco-navbar.ftco-navbar-light.scrolled .navbar-brand {
+    padding: 18px 22px 18px 0;
+    margin-right: 10px;
     position: relative;
   }
 
@@ -311,21 +343,18 @@ html:not(.ws-js-ready) .ftco-animate {
     background: var(--ws-black);
   }
 
-  #ftco-navbar.ftco-navbar-light.scrolled .navbar-brand {
-    padding: 16px 24px 16px 0;
-    font-size: 20px;
-  }
-
   #ftco-navbar.ftco-navbar-light .navbar-nav {
     align-items: center;
     gap: 2px;
+    flex-wrap: nowrap;
   }
 
-  #ftco-navbar.ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
-    font-size: 14px;
+  #ftco-navbar.ftco-navbar-light .navbar-nav > .nav-item > .nav-link,
+  #ftco-navbar.ftco-navbar-light.scrolled .navbar-nav > .nav-item > .nav-link {
+    font-size: 13.5px;
     font-weight: 600;
     color: var(--ws-ink) !important;
-    padding: 20px 10px !important;
+    padding: 18px 9px !important;
     white-space: nowrap;
     position: relative;
     z-index: 1;
@@ -333,11 +362,11 @@ html:not(.ws-js-ready) .ftco-animate {
 
   #ftco-navbar.ftco-navbar-light .navbar-nav > .nav-item > .nav-link::after {
     position: absolute;
-    bottom: 14px;
-    left: 10px;
-    right: 10px;
+    bottom: 13px !important;
+    left: 9px;
+    right: 9px;
     width: auto;
-    height: 5px;
+    height: 4px;
     content: "";
     background: var(--ws-primary);
     z-index: -1;
@@ -356,10 +385,28 @@ html:not(.ws-js-ready) .ftco-animate {
   }
 }
 
+/* Compact spacing at 992px-1199px so even French/Swahili labels stay on one crisp line */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  #ftco-navbar.ftco-navbar-light .navbar-brand,
+  #ftco-navbar.ftco-navbar-light.scrolled .navbar-brand {
+    font-size: 18px;
+    padding: 16px 16px 16px 0;
+    margin-right: 6px;
+  }
+
+  #ftco-navbar.ftco-navbar-light .navbar-nav > .nav-item > .nav-link,
+  #ftco-navbar.ftco-navbar-light.scrolled .navbar-nav > .nav-item > .nav-link {
+    font-size: 12.5px;
+    padding: 16px 6px !important;
+  }
+}
+
 /* Mobile & Tablet Navbar (< 992px): solid black bar in both top & scrolled states */
 @media (max-width: 991.98px) {
   #ftco-navbar.ftco-navbar-light,
-  #ftco-navbar.ftco-navbar-light.scrolled {
+  #ftco-navbar.ftco-navbar-light.scrolled,
+  #ftco-navbar.ftco-navbar-light.scrolled.awake,
+  #ftco-navbar.ftco-navbar-light.scrolled.sleep {
     background: var(--ws-black) !important;
     border-bottom: 2px solid var(--ws-primary);
     padding: 10px 14px !important;
@@ -393,8 +440,12 @@ html:not(.ws-js-ready) .ftco-animate {
     color: var(--ws-primary) !important;
   }
 
+  #ftco-navbar.ftco-navbar-light .navbar-collapse {
+    display: none;
+  }
+
   #ftco-navbar.ftco-navbar-light .navbar-collapse.show {
-    display: block;
+    display: block !important;
     border-top: 1px solid rgba(255, 255, 255, 0.14);
     margin-top: 10px;
     padding-top: 8px;
@@ -415,7 +466,6 @@ html:not(.ws-js-ready) .ftco-animate {
   }
 }
 
-/* Navbar Saved Count Badge */
 .ws-saved-count {
   display: inline-flex;
   align-items: center;
@@ -433,7 +483,6 @@ html:not(.ws-js-ready) .ftco-animate {
   line-height: 1;
 }
 
-/* Navbar More Dropdown */
 .ws-nav-dropdown {
   position: relative;
 }
@@ -505,7 +554,6 @@ html:not(.ws-js-ready) .ftco-animate {
   }
 }
 
-/* Navbar Language Switcher (EN / SW / FR) */
 .ws-lang-group {
   display: inline-flex;
   align-items: center;
@@ -521,11 +569,11 @@ html:not(.ws-js-ready) .ftco-animate {
   border: 0;
   background: transparent;
   color: var(--ws-ink);
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.04em;
-  padding: 5px 8px;
-  min-height: 30px;
+  padding: 5px 7px;
+  min-height: 28px;
   border-radius: 20px;
   cursor: pointer;
   line-height: 1;
@@ -558,23 +606,22 @@ html:not(.ws-js-ready) .ftco-animate {
   }
 }
 
-/* Navbar Primary CTA ("List a Space"): always crisp black on #fcd307 yellow */
 #ftco-navbar.ftco-navbar-light .navbar-nav > .nav-item.cta > a,
 #ftco-navbar.ftco-navbar-light.scrolled .navbar-nav > .nav-item.cta > a {
   background: var(--ws-primary) !important;
   border: 2px solid var(--ws-black) !important;
   color: var(--ws-black) !important;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 700 !important;
-  padding: 8px 16px !important;
+  padding: 7px 14px !important;
   margin-top: 0 !important;
-  margin-left: 6px;
+  margin-left: 4px;
   border-radius: 30px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  min-height: 40px;
+  min-height: 38px;
 }
 
 #ftco-navbar.ftco-navbar-light .navbar-nav > .nav-item.cta > a::after {
@@ -607,99 +654,105 @@ html:not(.ws-js-ready) .ftco-animate {
     margin-top: 8px !important;
     border-color: var(--ws-primary) !important;
     width: 100%;
+    min-height: 44px;
   }
 }
 
 /* --------------------------------------------------------------------------
-   5. Home Hero (.ws-home-hero) & Inner Page Hero (.hero-wrap-2)
+   5. Zero-Overlap Whitespace Architectural Split Hero (.ws-home-hero)
    -------------------------------------------------------------------------- */
-.hero-wrap.ws-home-hero {
+.ws-home-hero {
   position: relative;
-  min-height: 640px;
-  height: auto;
-  background-color: var(--ws-black);
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  display: flex;
-  align-items: center;
-  padding: 88px 0 84px;
+  background-color: var(--ws-stage);
+  border-bottom: 4px solid var(--ws-primary);
+  padding: 72px 0 80px;
   overflow: hidden;
 }
 
-/*Whitespaces's signature solid black architectural left block + dark photo scrim */
-.hero-wrap.ws-home-hero .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.66);
-  z-index: 1;
-}
-
-.hero-wrap.ws-home-hero .ws-home-hero__accent {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 22%;
-  background: var(--ws-black);
-  border-right: 4px solid var(--ws-primary);
-  z-index: 1;
-}
-
 @media (max-width: 991.98px) {
-  .hero-wrap.ws-home-hero .ws-home-hero__accent {
-    width: 8px;
-    border-right: 0;
-    background: var(--ws-primary);
-  }
-  .hero-wrap.ws-home-hero {
-    min-height: 540px;
-    padding: 64px 0;
+  .ws-home-hero {
+    padding: 48px 0 56px;
   }
 }
 
-.hero-wrap.ws-home-hero .container {
-  position: relative;
-  z-index: 2;
-}
-
-.hero-wrap.ws-home-hero .subheading {
+.ws-hero-kicker {
   display: inline-block;
   background: var(--ws-primary);
   color: var(--ws-black) !important;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   padding: 6px 14px;
+  margin-bottom: 18px;
+  line-height: 1.3;
+}
+
+.ws-hero-title {
+  color: var(--ws-white) !important;
+  font-size: clamp(34px, 4.4vw, 56px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
   margin-bottom: 18px;
 }
 
-.hero-wrap.ws-home-hero h1 {
-  color: var(--ws-white) !important;
-  font-size: clamp(36px, 5vw, 66px);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+.ws-hero-rule {
+  width: 68px;
+  height: 5px;
+  background: var(--ws-primary);
+  margin-bottom: 20px;
 }
 
-.hero-wrap.ws-home-hero p {
-  color: rgba(255, 255, 255, 0.94) !important;
-  font-size: clamp(16px, 1.8vw, 19px);
+.ws-hero-lead {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: clamp(16px, 1.5vw, 18.5px);
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.68;
+  max-width: 34rem;
+  margin-bottom: 28px;
+}
+
+.ws-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.ws-hero-cities {
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  padding-top: 18px;
+}
+
+.ws-hero-cities__label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ws-primary);
+  margin-bottom: 10px;
+}
+
+.ws-hero-cities__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
 }
 
 .ws-hero-city-pill {
   display: inline-flex;
   align-items: center;
-  padding: 6px 14px;
-  background: rgba(20, 19, 19, 0.88);
+  padding: 6px 13px;
+  background: #171616;
   color: var(--ws-white) !important;
-  border: 1px solid rgba(255, 255, 255, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.32);
   font-size: 12.5px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
@@ -710,16 +763,129 @@ html:not(.ws-js-ready) .ftco-animate {
   color: var(--ws-black) !important;
 }
 
+/* Right-Column Framed Studio Showcase Card */
+.ws-hero-showcase {
+  background: var(--ws-footer);
+  border: 2px solid var(--ws-white);
+  box-shadow: 10px 10px 0 var(--ws-primary);
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 575.98px) {
+  .ws-hero-showcase {
+    box-shadow: 6px 6px 0 var(--ws-primary);
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+}
+
+.ws-hero-showcase__photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: var(--ws-black);
+  overflow: hidden;
+}
+
+.ws-hero-showcase__photo img {
+  object-fit: cover;
+}
+
+.ws-hero-showcase__meta {
+  border-top: 2px solid var(--ws-primary);
+  padding: 18px 20px;
+  background: var(--ws-footer);
+}
+
+.ws-hero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.ws-hero-stat strong {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--ws-primary);
+  line-height: 1.1;
+}
+
+.ws-hero-stat span {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.88);
+  margin-top: 4px;
+}
+
+@media (max-width: 420px) {
+  .ws-hero-stat strong {
+    font-size: 20px;
+  }
+  .ws-hero-stat span {
+    font-size: 10.5px;
+    letter-spacing: 0.03em;
+  }
+}
+
+.ws-hero-showcase__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.ws-hero-showcase__footer a {
+  color: var(--ws-primary) !important;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(252, 211, 7, 0.5) !important;
+  background: transparent !important;
+}
+
+.ws-hero-showcase__footer a:hover {
+  color: var(--ws-white) !important;
+  border-bottom-color: var(--ws-white) !important;
+}
+
+/* Section 2 Framed Photo */
+.ws-about-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  min-height: 320px;
+  background: var(--ws-footer);
+  border: 2px solid var(--ws-black);
+  box-shadow: 10px 10px 0 var(--ws-primary);
+  margin-right: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.ws-about-photo img {
+  object-fit: cover;
+}
+
 /* Inner Page Hero (.hero-wrap-2) */
 .hero-wrap.hero-wrap-2 {
   position: relative;
-  min-height: 360px;
-  height: auto;
-  padding: 76px 0 68px;
-  background-color: var(--ws-black);
+  min-height: 320px;
+  height: auto !important;
+  padding: 68px 0 64px;
+  background-color: var(--ws-stage);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  border-bottom: 4px solid var(--ws-primary);
   display: flex;
   align-items: center;
 }
@@ -728,7 +894,7 @@ html:not(.ws-js-ready) .ftco-animate {
   position: absolute;
   inset: 0;
   background: var(--ws-black);
-  opacity: 0.72 !important;
+  opacity: 0.78 !important;
   z-index: 1;
 }
 
@@ -739,7 +905,7 @@ html:not(.ws-js-ready) .ftco-animate {
 
 .hero-wrap.hero-wrap-2 .bread {
   color: var(--ws-white) !important;
-  font-size: clamp(30px, 4.2vw, 50px);
+  font-size: clamp(30px, 4.2vw, 48px);
   font-weight: 800;
   line-height: 1.16;
 }
@@ -752,9 +918,9 @@ html:not(.ws-js-ready) .ftco-animate {
 }
 
 .hero-wrap.hero-wrap-2 .breadcrumbs {
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--ws-primary) !important;
   margin-bottom: 0;
@@ -766,12 +932,13 @@ html:not(.ws-js-ready) .ftco-animate {
 
 .hero-wrap.hero-wrap-2 .breadcrumbs a {
   color: var(--ws-white) !important;
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid transparent !important;
+  background: transparent !important;
 }
 
 .hero-wrap.hero-wrap-2 .breadcrumbs a:hover {
   color: var(--ws-primary) !important;
-  border-bottom-color: var(--ws-primary);
+  border-bottom-color: var(--ws-primary) !important;
 }
 
 .hero-wrap.hero-wrap-2 .breadcrumbs i {
@@ -828,7 +995,6 @@ html:not(.ws-js-ready) .ftco-animate {
   margin-bottom: 0;
 }
 
-/* Counter Strip (#section-counter) */
 #section-counter.ftco-counter {
   position: relative;
   z-index: 0;
@@ -836,7 +1002,7 @@ html:not(.ws-js-ready) .ftco-animate {
 
 #section-counter.ftco-counter::after {
   background: var(--ws-black);
-  opacity: 0.78 !important;
+  opacity: 0.8 !important;
 }
 
 #section-counter.ftco-counter .text strong.number {
@@ -855,7 +1021,6 @@ html:not(.ws-js-ready) .ftco-animate {
   color: var(--ws-white) !important;
 }
 
-/* Rate Band Cards (.block-7) */
 .block-7 {
   border: 1px solid #d4d4d4;
   background: var(--ws-white);
@@ -913,7 +1078,6 @@ html:not(.ws-js-ready) .ftco-animate {
   font-weight: 700;
 }
 
-/* Testimonials Section (.testimony-section) */
 .testimony-section {
   background: var(--ws-primary) !important;
 }
@@ -1025,11 +1189,12 @@ html:not(.ws-js-ready) .ftco-animate {
 
 .ws-space-card__body h3 a {
   color: var(--ws-black) !important;
-  border-bottom: 2px solid transparent;
+  border-bottom: 2px solid transparent !important;
+  background: transparent !important;
 }
 
 .ws-space-card__body h3 a:hover {
-  border-bottom-color: var(--ws-primary);
+  border-bottom-color: var(--ws-primary) !important;
 }
 
 .ws-badge {
@@ -1054,7 +1219,6 @@ html:not(.ws-js-ready) .ftco-animate {
   letter-spacing: 0.08em;
 }
 
-/* Save Button */
 .ws-save-btn {
   min-height: 38px;
   padding: 6px 12px;
@@ -1084,7 +1248,6 @@ html:not(.ws-js-ready) .ftco-animate {
   border-color: var(--ws-primary);
 }
 
-/* Filter Bar & Amenity Chips */
 .ws-filter-bar {
   background: var(--ws-light);
   border: 1px solid #d4d4d4;
@@ -1121,7 +1284,6 @@ html:not(.ws-js-ready) .ftco-animate {
   color: var(--ws-primary) !important;
 }
 
-/* Form Controls */
 .form-control {
   font-size: 15px !important;
   color: var(--ws-black) !important;
@@ -1192,7 +1354,7 @@ select.form-control {
 }
 
 /* --------------------------------------------------------------------------
-   9. Footer (.ftco-footer) - Polished Bottom-of-Page Hierarchy & Contrast
+   9. Footer (.ftco-footer)
    -------------------------------------------------------------------------- */
 .ftco-footer {
   background: var(--ws-footer) !important;
@@ -1386,6 +1548,7 @@ select.form-control {
 }
 
 .ws-fab {
+  position: relative;
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -1413,6 +1576,18 @@ select.form-control {
   transform: translateY(-2px);
 }
 
+.ws-fab__live-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--ws-primary);
+  border: 2px solid var(--ws-black);
+  animation: pulse 1.6s infinite;
+}
+
 .ws-fab--whatsapp {
   background: var(--ws-black);
   color: var(--ws-primary) !important;
@@ -1428,7 +1603,7 @@ select.form-control {
 }
 
 .ws-voice-popover {
-  width: min(320px, calc(100vw - 36px));
+  width: min(330px, calc(100vw - 36px));
   background: var(--ws-white);
   border: 2px solid var(--ws-black);
   border-top: 5px solid var(--ws-primary);
@@ -1494,7 +1669,6 @@ select.form-control {
   color: rgba(255, 255, 255, 0.9) !important;
 }
 
-/* Lift floating buttons automatically while cookie banner is open */
 body.ws-cookie-open .ws-floating-stack,
 body.ws-cookie-open .ws-scroll-top {
   bottom: 112px;

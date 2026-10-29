@@ -20,31 +20,28 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* 1. Whitespace Signature Hero */}
-      <section
-        className="hero-wrap ws-home-hero"
-        style={{ backgroundImage: "url('/images/hero-studio.jpg')" }}
-      >
-        <div className="overlay" />
-        <div className="ws-home-hero__accent" aria-hidden="true" />
+      {/* 1. Whitespace Architectural Split Hero - Zero-Overlap Responsive Flow */}
+      <section className="ws-home-hero">
         <div className="container">
-          <div className="row no-gutters slider-text align-items-center">
-            <div className="col-lg-8 ftco-animate">
-              <div className="text">
-                <span className="subheading">{t("hero.kicker")}</span>
-                <h1 className="mb-4">{t("hero.title")}</h1>
-                <p className="mb-4" style={{ maxWidth: "38rem" }}>
-                  {t("hero.subtitle")}
-                </p>
-                <div className="d-flex flex-wrap align-items-center mb-4" style={{ gap: "12px" }}>
-                  <Link href="/spaces" className="btn btn-primary py-3 px-4">
-                    {t("hero.browse")}
-                  </Link>
-                  <Link href="/list" className="btn btn-white py-3 px-4">
-                    {t("hero.list")}
-                  </Link>
-                </div>
-                <div className="d-flex flex-wrap align-items-center" style={{ gap: "8px" }}>
+          <div className="row align-items-center">
+            <div className="col-lg-6 mb-5 mb-lg-0 pr-lg-4">
+              <span className="ws-hero-kicker">{t("hero.kicker")}</span>
+              <h1 className="ws-hero-title">{t("hero.title")}</h1>
+              <div className="ws-hero-rule" aria-hidden="true" />
+              <p className="ws-hero-lead">{t("hero.subtitle")}</p>
+
+              <div className="ws-hero-actions">
+                <Link href="/spaces" className="btn btn-primary py-3 px-4">
+                  {t("hero.browse")}
+                </Link>
+                <Link href="/list" className="btn btn-white py-3 px-4">
+                  {t("hero.list")}
+                </Link>
+              </div>
+
+              <div className="ws-hero-cities">
+                <span className="ws-hero-cities__label">Browse by City</span>
+                <div className="ws-hero-cities__list">
                   {CITY_PROFILES.map((c) => (
                     <Link
                       key={c.slug}
@@ -57,29 +54,62 @@ export default async function HomePage() {
                 </div>
               </div>
             </div>
+
+            <div className="col-lg-6 pl-lg-4">
+              <div className="ws-hero-showcase">
+                <div className="ws-hero-showcase__photo">
+                  <Image
+                    src="/images/hero-studio.jpg"
+                    alt="Musicians and audio engineer preparing a rehearsal and recording session inside an African studio"
+                    fill
+                    priority
+                    sizes="(max-width: 991px) 100vw, 50vw"
+                  />
+                </div>
+                <div className="ws-hero-showcase__meta">
+                  <div className="ws-hero-stats-grid">
+                    <div className="ws-hero-stat">
+                      <strong>{SPACES.length}</strong>
+                      <span>Verified Rooms</span>
+                    </div>
+                    <div className="ws-hero-stat">
+                      <strong>{CITY_PROFILES.length}</strong>
+                      <span>African Cities</span>
+                    </div>
+                    <div className="ws-hero-stat">
+                      <strong>{SPACE_TYPE_OPTIONS.length}</strong>
+                      <span>Space Types</span>
+                    </div>
+                  </div>
+                  <div className="ws-hero-showcase__footer">
+                    <span>Direct host arrangement · Power &amp; acoustic specs</span>
+                    <Link href="/types">Space Types &rarr;</Link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 2. Why Space Matters + 4 Discipline Pillars (Exact Whitespace Welcome Section) */}
-      <section className="ftco-section ftco-no-pt ftco-no-pb">
+      {/* 2. Why Space Matters + 4 Discipline Pillars */}
+      <section className="ftco-section">
         <div className="container">
-          <div className="row no-gutters">
-            <div
-              className="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center"
-              style={{
-                backgroundImage: "url('/images/about-studio.jpg')",
-                minHeight: "420px",
-              }}
-              role="img"
-              aria-label="Musician adjusting studio microphone and stand before rehearsal"
-            />
-            <div className="col-md-7 wrap-about pb-md-5 ftco-animate">
-              <div className="heading-section mb-4 pt-5 pl-md-5">
-                <div className="pr-md-5 mr-md-5">
-                  <span className="subheading">{t("home.whySubheading")}</span>
-                  <h2 className="mb-4">{t("home.whyHeading")}</h2>
-                </div>
+          <div className="row align-items-center mb-5 pb-lg-3">
+            <div className="col-lg-5 mb-4 mb-lg-0">
+              <div className="ws-about-photo">
+                <Image
+                  src="/images/about-studio.jpg"
+                  alt="Musician adjusting studio microphone and stand before rehearsal"
+                  fill
+                  sizes="(max-width: 991px) 100vw, 42vw"
+                />
+              </div>
+            </div>
+            <div className="col-lg-7 pl-lg-5 ftco-animate">
+              <div className="heading-section">
+                <span className="subheading">{t("home.whySubheading")}</span>
+                <h2 className="mb-4">{t("home.whyHeading")}</h2>
                 <p>
                   Creative work asks for physical honesty: four hours where a drummer can lock a groove without an angry knock on the door, a silent vocal booth that runs on solar batteries when grid power dips, a sink built for stoneware clay, or five metres of north daylight in front of an easel.
                 </p>
@@ -94,7 +124,7 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <div className="row py-5 ftco-services">
+          <div className="row pt-2 ftco-services">
             <div className="col-md-6 col-lg-3 mb-4 mb-lg-0 d-flex align-self-stretch ftco-animate">
               <div className="media block-6 services d-block">
                 <div className="icon d-flex justify-content-center align-items-center">
