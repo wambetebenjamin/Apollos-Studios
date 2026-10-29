@@ -110,7 +110,13 @@ export function Footer() {
                   <Link href="/terms">{t("footer.terms")}</Link>
                 </li>
                 <li>
-                  <a href="/image-credits.md">{t("footer.credits")}</a>
+                  <a
+                    href="/image-credits.md"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t("footer.credits")}
+                  </a>
                 </li>
               </ul>
             </div>

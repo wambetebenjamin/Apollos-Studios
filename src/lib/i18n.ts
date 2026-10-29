@@ -65,11 +65,12 @@ const en = {
 
   "voice.tourTitle": "Apollos Audio Guide",
   "voice.tourIntro":
-    "Listen to a short spoken overview of this page so you can browse hands-free.",
-  "voice.statusReady": "Ready to read this page aloud.",
-  "voice.statusPlaying": "Speaking page guide...",
+    "Hands-free audio tour that keeps playing smoothly even as you switch pages across the site.",
+  "voice.statusReady": "Ready to play continuous audio tour.",
+  "voice.statusPlaying": "Playing audio tour (continues across pages)...",
   "voice.statusPaused": "Audio guide paused.",
   "voice.statusUnsupported": "Speech synthesis is not available in this browser.",
+  "voice.readCurrent": "Read This Page",
   "cta.play": "Play",
   "cta.pause": "Pause",
   "cta.stop": "Stop",
@@ -156,11 +157,12 @@ const sw: Record<DictKey, string> = {
 
   "voice.tourTitle": "Mwongozo wa Sauti wa Apollos",
   "voice.tourIntro":
-    "Sikiliza maelezo mafupi ya ukurasa huu ili uvinjari kwa urahisi.",
-  "voice.statusReady": "Tayari kusoma ukurasa huu kwa sauti.",
-  "voice.statusPlaying": "Inasoma mwongozo wa ukurasa...",
+    "Sikiliza mwongozo wa sauti unaoendelea kucheza hata ukibadilisha kurasa za tovuti.",
+  "voice.statusReady": "Tayari kucheza mwongozo wa sauti.",
+  "voice.statusPlaying": "Inacheza mwongozo wa sauti (unaendelea ukibadili kurasa)...",
   "voice.statusPaused": "Mwongozo wa sauti umesimamishwa kwa muda.",
   "voice.statusUnsupported": "Kivinjari hiki hakina huduma ya kusoma kwa sauti.",
+  "voice.readCurrent": "Soma Ukurasa Huu",
   "cta.play": "Cheza",
   "cta.pause": "Sitisha",
   "cta.stop": "Simamisha",
@@ -245,11 +247,12 @@ const fr: Record<DictKey, string> = {
 
   "voice.tourTitle": "Guide Audio Apollos",
   "voice.tourIntro":
-    "Écoutez une présentation vocale concise de cette page pendant votre visite.",
-  "voice.statusReady": "Prêt à lire la présentation de la page.",
-  "voice.statusPlaying": "Lecture du guide audio en cours...",
+    "Visite vocale continue qui poursuit sa lecture même lorsque vous changez de page.",
+  "voice.statusReady": "Prêt à lancer la visite audio continue.",
+  "voice.statusPlaying": "Lecture en cours (continue entre les pages)...",
   "voice.statusPaused": "Guide audio en pause.",
   "voice.statusUnsupported": "La synthèse vocale n'est pas disponible sur ce navigateur.",
+  "voice.readCurrent": "Lire cette page",
   "cta.play": "Lire",
   "cta.pause": "Pause",
   "cta.stop": "Arrêter",

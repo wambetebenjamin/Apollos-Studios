@@ -1,4 +1,4 @@
-@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/theme" layer(theme) prefix(tw);
 @import "tailwindcss/utilities" layer(utilities);
 
 @import "aos/dist/aos.css";
