@@ -1,0 +1,14 @@
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/utilities" layer(utilities);
+
+@import "aos/dist/aos.css";
+@import "swiper/css";
+@import "swiper/css/pagination";
+
+@import "../styles/open-iconic.css";
+@import "../styles/animate.css";
+@import "../styles/ionicons.css";
+@import "../styles/flaticon.css";
+@import "../styles/icomoon.css";
+@import "../styles/template-style.css";
+@import "../styles/apollos-studios.css";
