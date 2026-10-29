@@ -21,7 +21,7 @@ export function TestimonialsCarousel() {
       >
         {ARTIST_VOICES.map((item) => (
           <SwiperSlide key={item.name} style={{ height: "auto" }}>
-            <div className="testimony-wrap p-4 pb-5 h-100 d-flex flex-column justify-content-between bg-white border">
+            <div className="testimony-wrap p-4 pb-5 h-100 d-flex flex-column justify-content-between">
               <div
                 className="user-img mb-4"
                 style={{ backgroundImage: `url('${item.image}')` }}
